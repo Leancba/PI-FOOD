@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { KEY } = process.env;
 const { Router } = require('express');
-const { getAllRecipes } = require('../services/index.js')
+const { getAllRecipes, getDBInfo } = require('../services/index.js')
 const router = Router();
 
 
@@ -20,6 +20,9 @@ router.get('/', async (req, res) => {
     const { title } = req.query
 
     let recipes = await getAllRecipes();
+    let recipes2 = await getDBInfo()
+
+    const AllRecipes = [...recipes, ...recipes2]
     
     
 
@@ -35,7 +38,7 @@ router.get('/', async (req, res) => {
         
     } else {
     
-        res.json(recipes);
+        res.json(AllRecipes);
 
     }
         

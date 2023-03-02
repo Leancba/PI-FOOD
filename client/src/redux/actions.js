@@ -1,5 +1,29 @@
-import { RECIPES, RECIPES_BY_NAME, GET_ALL_DIETS, FILTER_BY_DIETS, FLAG , SORT_BY_TITLE, SORT_BY_SCORE, RECIPE_DETAIL, CLEAN_DETAIL_RECIPE } from "./actionTypes";
+import { 
+    RECIPES, 
+    RECIPES_BY_NAME, 
+    GET_ALL_DIETS, 
+    FILTER_BY_DIETS, 
+    FLAG , 
+    SORT_BY_TITLE, 
+    SORT_BY_SCORE,
+    RECIPE_DETAIL, 
+    CLEAN_DETAIL_RECIPE,
+    POST_RECIPE
+ } from "./actionTypes";
+
 import axios from 'axios'
+
+
+export const postRecipe = (payload) => {
+    try {
+        return async () => {
+            let newRecipe = await axios.post('http://localhost:3002/recipe' , payload);
+            return newRecipe;
+        };
+    } catch (error) {
+        console.log('ERROR EN postRecipe', error)
+    }
+};
 
 export function getAllRecipes() {
 

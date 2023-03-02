@@ -1,0 +1,32 @@
+.Home {
+    background-color: #2a2a2a;
+    text-align: center;
+    height: 100vh;
+}
+
+.center{
+    display: flex;
+    flex-direction: row;
+}
+
+.column{
+    background-color: #2a2a2a;
+    padding-left: 15%;
+    padding-top: 60px;
+    height: 100%;
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.recipe-container{
+    background-color: #2a2a2a;
+    flex: 1;
+    overflow-y: auto;
+    margin: 20px 0px 40px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;   
+}

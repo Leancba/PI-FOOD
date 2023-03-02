@@ -1,0 +1,18 @@
+.container-detail{
+    
+    height: 100vh;
+     width: 100%;
+  background-image: url('./background.jpeg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+
+.paco {
+  background: black;
+  color: white;
+  display: inline-block;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import './Pagination.css'
 
 
 export default function Pagination ({pageNow, allVideogamesfromState, vgPerPage}) {
@@ -8,17 +9,19 @@ export default function Pagination ({pageNow, allVideogamesfromState, vgPerPage}
         pageNumbers.push(i)
         }
     return (
-        <div>
-            <div> 
+        
+        <div className='pagination'>
+            <div className='numbers'>
                 { pageNumbers &&
                 pageNumbers.map(num => {
                     return (
-                    <div key={num}>
+                    <div className='numbers'  key={num}>
                         <button onClick={() => pageNow(num)}>{num}</button>
                     </div>
                     )
                 })}
             </div>
-        </div>
+         </div>
+    
     )
 }

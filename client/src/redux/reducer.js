@@ -7,7 +7,8 @@ FLAG,
 SORT_BY_TITLE,
 SORT_BY_SCORE,
 RECIPE_DETAIL,
-CLEAN_DETAIL_RECIPE
+CLEAN_DETAIL_RECIPE,
+POST_RECIPE
 } from "./actionTypes";
 
 const initialState = {
@@ -31,8 +32,16 @@ const initialState = {
 export default function rootReducer (state = initialState, action){
 
     
+
+    
     
     switch (action.type) {
+
+
+        case POST_RECIPE:
+            return {
+                ...state,
+            };
 
         case FLAG:
             
@@ -99,13 +108,28 @@ export default function rootReducer (state = initialState, action){
 
         case FILTER_BY_DIETS:
 
-            const gameFilters = state.recipesForFilter.filter(el => el.diets.includes(action.payload))
+            const recipeFilter = state.recipesForFilter.filter(el => el.diets.includes(action.payload))
 
-            if(gameFilters.length > 0){
+            //aca mediante el action.payload(tipo de dieta), para el rendereizado del home, ubico
+            //en primer lugar el tipo de dieta para poder ver al filtrarlo en el front
+
+            recipeFilter.forEach(receta => {
+                const indiceTipoDieta = receta.diets.indexOf(action.payload);
+                if (indiceTipoDieta > -1) {
+
+                  receta.diets.splice(indiceTipoDieta, 1);
+                  receta.diets.unshift(action.payload);
+
+                }
+              });
+
+            console.log(recipeFilter)
+
+            if(recipeFilter.length > 0){
 
                 return {
                     ...state,
-                    recipes: gameFilters,
+                    recipes: recipeFilter,
                }
 
             } else {

@@ -8,25 +8,7 @@ const getAllRecipes = async () => {
 
         
 
-        let recipeDb = await Recipe.findAll ({
-
-            include: [
-                {
-                    model: Diet,
-                    attributes: ['name'], 
-                    through: { attributes: [] },
-                }
-            ]    
-        });
-
-        console.log(recipeDb)
-
-        let recipeApi = info.data.results
-        
-
-        const allRecipes = [...recipeApi, ...recipeDb]
-
-        const allRecipesInfo = allRecipes.map(function (recipe, index)  {
+        const AllRecipesApi = info.data.results.map(function (recipe, index)  {
             
             return {
                 id: index,
@@ -35,19 +17,13 @@ const getAllRecipes = async () => {
                 summary: recipe?.summary,
                 healthScore: recipe?.healthScore,
                 diets: recipe?.diets,
-                steps: recipe.created === true?
-                recipe.steps
-                :
-                (recipe.analyzedInstructions[0] && recipe.analyzedInstructions[0].steps ? recipe.analyzedInstructions[0].steps.map(e => e.step).join("| ") : 'No hay pasos'),
-                created: recipe.created? recipe.created : false
-                
-                
+                steps: (recipe.analyzedInstructions[0] && recipe.analyzedInstructions[0].steps ? recipe.analyzedInstructions[0].steps.map(e => e.step).join(" ") : 'No hay pasos')
                 
             }
         });
 
         
-        return allRecipesInfo;
+        return AllRecipesApi;
 
     } catch (error) {
 
@@ -56,5 +32,35 @@ const getAllRecipes = async () => {
     }
 };
 
+const getDBInfo = async () => {
+    
+    try {
+        const dbInfo = await Recipe.findAll({
+            include: {
+                model: Diet,
+                attributes: ['name'],
+                through: {
+                    attributes: [],
+                },
+            }
+        });
 
-module.exports = { getAllRecipes }
+        //aca lo que hacemos es convertir el objeto dbInfo que es un objeto sequelize en un
+        // mediante el metodo stringify en una cadena de caracteres json,
+        //luego se aplica el json.parse para convertir esa cadena en un objeto javascript y asi realizar el metodo
+        // forEach que me devuelve las diets   
+
+        var DbRecipes = JSON.parse(JSON.stringify(dbInfo, null, 2));
+        
+        DbRecipes.forEach((e) => (e.diets = e.diets.map((d) => d.name)));
+
+        return DbRecipes;
+
+    } catch (error) {
+
+        console.log(error);
+    }
+};
+
+
+module.exports = { getAllRecipes, getDBInfo }

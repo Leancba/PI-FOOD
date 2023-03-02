@@ -46,7 +46,11 @@ router.post('/', async (req, res, next) => {
         
     try {
 
-        const { title, summary, healthScore, steps, image, diet } = req.body;
+        const { title, image, summary, healthScore , steps, diet } = req.body;
+
+        // const { title, diet } = req.body;
+
+        
 
         let newRecipe = await Recipe.create({ ...req.body });
 
@@ -55,6 +59,7 @@ router.post('/', async (req, res, next) => {
             where: {
                 name: diet
             }});
+        console.log('viendo que es', DietDb)
            
         await newRecipe.addDiet(DietDb);
 

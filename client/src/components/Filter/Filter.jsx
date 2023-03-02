@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import './Filter.css'
+import logo from './cooking3.png'
 import { useDispatch, useSelector } from "react-redux";
 import {
 
@@ -110,62 +112,58 @@ export default function Filters({ setOrder }) {
 
   // ---------------------------------------------------------------
   return (
-    <div>
+    <section className="container">
 
+     <figure className="container-image-filter">
+          <img width={100} height= {80} src= {logo}/>
+     </figure>
+
+
+    <div className="filter-container" >
+     <div className="filter">
+        <label>Diets</label>
+        <select className={allRecipes.length < 1? 'disable' : ''} onChange={e => handleDietsFilter(e)  }  >
+             <option  hidden value='ALL'> Diets </option >
+             <option  value='All'> All </option >
+             {allDiets?.map(el => (
+             <option key={el.id} value={el.name}> {el.name} </option >
+            ))}
+        </select>
+    </div>
+      
+    <div className="filter">
+      <label>Title</label>
+      <select className={titleFlag? '' : 'disable'} ref={titleSort} onChange={(e) => handleSort(e)}>
+          <option value="ALL">ALL</option>
+          <option value="ASC">A-Z</option>
+          <option value="DESC">Z-A</option>
+      </select>
+    </div>
+
+
+
+    <div className="filter"> 
+      <label>HealtScore</label>      
+          <select className={healtScoreFlag? '' : 'disable'} ref={healthScore} onChange={(e) => handleScore(e)}>
+          <option value="ALL">ALL</option>
+          <option value="MIN">- HealthScore</option>
+          <option value="MAX">+ HealthScore</option>
+      </select> 
+    </div>
+  </div>
+  
+  <div className="button-container">
       <button onClick={(e) => Reload(e)}>
-        Reload
+         Reload
       </button>
 
-
-      {allRecipes.length < 1 ? (
-
-        <select disabled >
-            <option  hidden value='ALL'> Diets </option >
-      </select>
-      ): 
-      (
-        <select onChange={e => handleDietsFilter(e)  }  >
-            <option  hidden value='ALL'> Diets </option >
-            <option  value='All'> All </option >
-            {allDiets?.map(el => (
-            <option key={el.id} value={el.name}> {el.name} </option >
-            ))
-                }
-      </select>
-      )}
-
-    {/*  ZONA DE ACOMODADO POR TITULO */ }
-
-    <label>Title</label>
-     
-    <select className={titleFlag? '' : 'disable'} ref={titleSort} onChange={(e) => handleSort(e)}>
-        <option value="ALL">ALL</option>
-        <option value="ASC">A-Z</option>
-        <option value="DESC">Z-A</option>
-    </select>
-
-
-
-    {/* ZONA DE ACOMODADO POR HEALTSCORE */}
-
-
-
-    <label>HealtScore</label>
-
-    {/* className={flag?  "popup active" : "popup "} */}
+      <Link to="/create">
+            <button >Create recipe</button>
+      </Link>
+  </div>
+          
       
-        <select className={healtScoreFlag? '' : 'disable'} ref={healthScore} onChange={(e) => handleScore(e)}>
-        <option value="ALL">ALL</option>
-        <option value="MIN">- HealthScore</option>
-        <option value="MAX">+ HealthScore</option>
-      </select> 
-        
-
       
-      {/* <select disabled >
-        <option > ALL </option >
-      </select> */}
-      
-    </div>
+    </section>
   );
 }

@@ -1,0 +1,47 @@
+  
+  .carta {
+    width: 300px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 5px;
+  }
+  
+  .carta img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+  }
+  
+  .carta h2 {
+    font-family: "Amatic SC", sans-serif;
+    color: gray;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 0px;
+  }
+  
+  .carta p {
+    font-family: "Amatic SC", sans-serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 7px;
+    color: rgb(255, 255, 255);
+  }
+  
+  .boton {
+    font-size: 1.2rem;
+    font-family: "Amatic SC", sans-serif;
+    display: block;
+    background-color: #280902;
+    color: rgb(155, 154, 154);
+    text-align: center;
+    padding: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0px 0px 10px 10px;
+  }
+  
+  .boton:hover {
+    background-color: #594a47c3;;
+  }

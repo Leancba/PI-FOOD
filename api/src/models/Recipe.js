@@ -20,11 +20,11 @@ module.exports = (sequelize) => {
     },
     summary: {
       type: DataTypes.TEXT,
-      allowNull: true,
+      allowNull: false,
     },
     healthScore: {
       type: DataTypes.FLOAT,
-      allowNull: true,
+      allowNull: false,
     },
     steps: {
       type: DataTypes.TEXT,
