@@ -12,9 +12,18 @@ export default function CardDetails() {
   
   const { id } = useParams();
   const recipe = useSelector((state) => state?.recipesDetails);
-  console.log(recipe)
+
+  console.log(recipe?.steps)
 
 
+//   const stepsText = "Primera oración. Segunda oración. Tercera oración.";
+// const stepsArray = stepsText.split(".");
+
+// console.log(stepsArray)
+
+
+  
+{/* <Link to="/home"><button >Go back</button></Link>           */}
 
   useEffect(() => {
 
@@ -24,9 +33,36 @@ export default function CardDetails() {
   }, [dispatch]);
 
   return (
-    <div className="container-detail" >
-      <h2>{recipe.title}</h2>
-      <Link to="/home"><button >Go back</button></Link>          
-    </div>
+  <section className="container-detail" >
+    <div class="receta">
+      <h2 class="receta-titulo">{recipe.title}</h2>
+      <img class="receta-imagen" src={recipe.image}alt="Imagen de la receta"/>
+      <div class="receta-tipos-dieta">
+        <h3>Tipos de dieta:</h3>
+          <ul>
+            {recipe.typeDiets?.map((diet, index) => (
+             <li key={index}>{diet}</li>
+           ))}
+          </ul>
+      </div>
+      <div class="receta-resumen">
+        <h3>Resumen de la receta:</h3>
+        <p dangerouslySetInnerHTML={{ __html: recipe?.summary?.replace(/<a\b[^>]*>(.*?)<\/a>/gi, '<strong>$1</strong>')}}></p>
+      </div>
+      <div class="receta-healthscore">
+        <h3>{recipe.healthScore}</h3>
+        <p></p>
+      </div>
+      <div class="receta-preparacion">
+        <h3>Paso a paso de la preparación:</h3>
+        <ol>
+            {recipe.steps?.map((diet, index) => (
+             <li key={index}>{diet}</li>
+           ))}
+          </ol>
+      </div>
+  </div>
+</section>
+
   );
 }

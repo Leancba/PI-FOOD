@@ -1,6 +1,6 @@
 .container-detail{
     
-    height: 100vh;
+    height: 100%;
      width: 100%;
   background-image: url('./background.jpeg');
   background-repeat: no-repeat;
@@ -8,11 +8,101 @@
   background-size: cover;
 }
 
+.container-detail strong {
 
-.paco {
-  background: black;
-  color: white;
-  display: inline-block;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  color: red;
+}
+
+
+.receta {
+  background-color: rgba(255, 255, 255, 0.715);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  border: 2px solid rgb(60, 60, 60);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.receta-titulo {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.receta-imagen {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.receta-tipos-dieta {
+  margin-bottom: 20px;
+}
+
+.receta-tipos-dieta h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.receta-tipos-dieta ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.receta-tipos-dieta li {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.receta-resumen {
+  margin-bottom: 20px;
+}
+
+.receta-resumen h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.receta-resumen p {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.receta-healthscore {
+  margin-bottom: 20px;
+}
+
+.receta-healthscore h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.receta-healthscore p {
+  font-size: 18px;
+}
+
+.receta-preparacion {
+  margin-bottom: 20px;
+}
+
+.receta-preparacion h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.receta-preparacion ol {
+  list-style-type: decimal;
+  margin: 0;
+  padding: 0;
+}
+
+.receta-preparacion li {
+  font-size: 18px;
+  line-height: 1.5;
 }

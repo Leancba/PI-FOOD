@@ -28,7 +28,7 @@ export default function CreateRecipe() {
   const [popuflag, setPopupflag] = useState(false)
 
   const [mensaje, setMensaje] = useState('')
-
+  
   
 
   const inputs = [
@@ -39,8 +39,8 @@ export default function CreateRecipe() {
       errorMessage:
         "Title should be 3-16 characters and shouldn't include any special character!",
       label: "Title",
-      pattern: "^[A-Za-z0-9]{3,16}$",
-      required: true,
+      required : true, 
+      pattern:"[a-zA-Z ]{3,}"
     },
     {
       name: "summary",
@@ -49,7 +49,7 @@ export default function CreateRecipe() {
       placeholder: "Summary of your recipe",
       errorMessage: "Mensaje de error",
       label: "Summary",
-      pattern: "^[a-zA-Z0-9]{30,}$",
+      pattern: "^[a-zA-Z0-9 ]{30,}$",
       required: true,
     }, 
     {
@@ -58,7 +58,7 @@ export default function CreateRecipe() {
       placeholder: "Steps of your recipe",
       errorMessage: "Mensaje de error",
       label: "Steps",
-      pattern: "^[a-zA-Z0-9]{30,}$",
+      pattern:"^(.*\\..*){1,}\\.$",
       required: true
     },
     {
@@ -70,7 +70,7 @@ export default function CreateRecipe() {
       label: "Health Score",
       min:"0",
       max:"100",
-      pattern: "^([1-9]|[1-9][0-9]|100)$",
+      pattern: `^([1-9]|[1-9][0-9]|100)$`,
       required: true,
     },
     {
@@ -92,7 +92,8 @@ export default function CreateRecipe() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
+
     if(values.diet.length === 0 ){
 
       setMensaje('Debes cargar una dieta')
@@ -100,18 +101,10 @@ export default function CreateRecipe() {
 
     }
 
-    // dispatch(postRecipe(values));
+
+    dispatch(postRecipe(values));
     
   };
-
-
-
-
-
-
-
-
-
 
   const onChange = (e) => {
 

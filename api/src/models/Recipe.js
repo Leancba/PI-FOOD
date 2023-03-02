@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     steps: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
       allowNull: true,
       defaultValue: 'No hay pasos',
     },

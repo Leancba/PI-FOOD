@@ -17,7 +17,7 @@ const getAllRecipes = async () => {
                 summary: recipe?.summary,
                 healthScore: recipe?.healthScore,
                 diets: recipe?.diets,
-                steps: (recipe.analyzedInstructions[0] && recipe.analyzedInstructions[0].steps ? recipe.analyzedInstructions[0].steps.map(e => e.step).join(" ") : 'No hay pasos')
+                steps: (recipe.analyzedInstructions[0] && recipe.analyzedInstructions[0].steps ? recipe.analyzedInstructions[0].steps.map(e => e.step) : 'No hay pasos')
                 
             }
         });
@@ -53,6 +53,9 @@ const getDBInfo = async () => {
         var DbRecipes = JSON.parse(JSON.stringify(dbInfo, null, 2));
         
         DbRecipes.forEach((e) => (e.diets = e.diets.map((d) => d.name)));
+        DbRecipes.forEach((recipe) => {
+            recipe.steps = recipe.steps.split('. ');
+          });
 
         return DbRecipes;
 
