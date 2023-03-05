@@ -10,7 +10,7 @@
 
 .container{
         background-image: url('./pruebita.jpeg');
-			background-size: 100% 100%; /* Establecer el ancho al 100% y el alto a 200px */
+        background-size: 100% 100%; /* Establecer el ancho al 100% y el alto a 200px */
         text-align: center;
         display: flex;
         flex-direction: column;

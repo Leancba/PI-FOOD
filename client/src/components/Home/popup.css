@@ -1,17 +1,5 @@
-
-.image{
-    border: 1px solid #808080;  
-}
-
-.info1{
-    text-align: left;
-    width: 53%;
-    float: right;
-    padding: 10px 0;
-}
-
 .overlay {
-    background: rgba(0, 0, 0, 0.819);
+    background: rgba(0, 0, 0, 0.674);
     position: fixed;
     z-index: 1000;
     top: 0;
@@ -29,13 +17,6 @@
     visibility: visible;
     
 }
-
-.popup img {
-    float: left;
-    width: 100%;
-    max-width: 400px;
-}
-
 .popup {
     border-radius: 10px;
     background: rgb(255, 255, 255);
@@ -64,63 +45,6 @@
     color: #000;
 }
 
-.popup p {
-    text-align: left;
-    color: rgb(0, 0, 0);
-    opacity: 0;
-}
-
-.popup h3 {
-    margin: 10px 0;
-    font-size: 36px;
-    font-weight: 600;
-    opacity: 0;
-    
-}
-
-.popup h4 {
-    font-size: 26px;
-    font-weight: 300;
-    margin-bottom: 40px;
-    opacity: 0;
-}
-
-.info1 i{
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 3px;
-    width: 27px;
-    height: 27px;
-    line-height: 27px;
-    text-align: center;
-    font-size: 17px;
-    border-radius: 50%;
-    background: #0bafe0;
-    color: rgb(255, 255, 255)
-}
-
-.info1 div{
-    margin-top: 20px;
-    padding: 0px;
-}
-
-.info1 div span{
-    font-weight: 700;
-    color: #000;
-}
-
-.promotion{
-    line-height: 10px;
-}
-
-.promotion h3{
-    font-size: 18px;
-  }
-
-.consultas{
-    color: rgba(200, 31, 31, 0.79);
-}
-
 .responsive-button{
     margin-top: 5px;
     font-weight: 700;
@@ -131,32 +55,51 @@
 
 
 
+/*cartel de error*/
+
+.error-popup__content {
+    background-color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .error-popup__title {
+    text-align: center;
+    color: #280902;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .error-popup__text {
+    color: #444;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .error-popup__button {
+    background-color: #280902;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .error-popup__button:hover {
+    color: #280902;
+    background-color: #ffffff;
+  }
+
+
+
+
 @media only screen and (min-width:320px) and (max-width:768px){
-    .info1{
-    width: 100%;     
-  }
-
-  .popup{
-    width: 100%;
-  }
-
-  .popup h3 {
-    text-align: center; 
-    font-size: 23px;
-    line-height: 25px;
-    
-}
-
-.popup span {
-    font-family: 'Montserrat';
-    color: #424242;
-    line-height: 5px;
-}
-
-.promotion h3{
-    font-size: 18px;
-    text-align: left;
-  }
+   
 
   .popup .btn-cerrar-popup{
     display: none ;
@@ -173,48 +116,4 @@
 /* ANIMACIONES */
 /* ------------------------- */
 .popup.active {	transform: scale(.85); opacity: 1; }
-.popup.active p { animation: entradaTexto .8s ease .5s forwards; }
-.popup.active h3 { animation: entradaTitulo .8s ease .5s forwards; }
-.popup.active h4 { animation: entradaSubtitulo .8s ease .5s forwards; }
-.popup.active .contenedor-inputs { animation: entradaInputs 1s linear 1s forwards; }
 
-@keyframes entradaTitulo {
-    from {
-        opacity: 0;
-        transform: translateY(-25px);
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes entradaTexto {
-    from {
-        opacity: 0;
-        transform: translateY(-25px);
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes entradaSubtitulo {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes entradaInputs {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}

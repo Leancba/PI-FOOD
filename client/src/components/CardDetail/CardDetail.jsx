@@ -13,13 +13,13 @@ export default function CardDetails() {
   const { id } = useParams();
   const recipe = useSelector((state) => state?.recipesDetails);
 
-  console.log(recipe?.steps)
+  console.log(recipe.steps)
 
 
 //   const stepsText = "Primera oración. Segunda oración. Tercera oración.";
 // const stepsArray = stepsText.split(".");
 
-// console.log(stepsArray)
+
 
 
   
@@ -55,11 +55,28 @@ export default function CardDetails() {
       </div>
       <div class="receta-preparacion">
         <h3>Paso a paso de la preparación:</h3>
-        <ol>
-            {recipe.steps?.map((diet, index) => (
-             <li key={index}>{diet}</li>
-           ))}
-          </ol>
+        {/* <ul>
+            {recipe.steps && recipe.steps.length > 0 ? 
+
+            recipe.steps?.map((steps, index) => (
+
+             <li key={index}>{steps}</li>
+           ))
+           
+           :
+
+           (  
+           <li>{recipe.steps}</li>
+           )
+            
+            }
+
+          </ul> */}
+
+
+
+
+
       </div>
   </div>
 </section>

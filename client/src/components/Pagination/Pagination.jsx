@@ -12,14 +12,19 @@ export default function Pagination ({pageNow, allVideogamesfromState, vgPerPage}
         
         <div className='pagination'>
             <div className='numbers'>
-                { pageNumbers &&
-                pageNumbers.map(num => {
-                    return (
-                    <div className='numbers'  key={num}>
-                        <button onClick={() => pageNow(num)}>{num}</button>
-                    </div>
-                    )
-                })}
+            {pageNumbers && pageNumbers.length ? (
+                    pageNumbers.map(num => {
+                        return (
+                        <div key={num}>
+                            <button onClick={() => pageNow(num)}>{num}</button>
+                        </div>
+                        )
+                    })
+                ) 
+                : 
+                (
+                <div className='numbers'> <p>Cargando recetas..</p></div>
+                )}
             </div>
          </div>
     

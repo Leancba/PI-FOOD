@@ -24,6 +24,7 @@ export default function Home(){
     const allRecipes = useSelector(state => state.recipes)
     const flag = useSelector(state => state.flag )
     
+    
 
   
 
@@ -38,6 +39,7 @@ export default function Home(){
         e.preventDefault();
         dispatch(setFlag(value));
         dispatch(getAllRecipes());
+        setCurrentPage(1)
 
     }
 
@@ -78,15 +80,25 @@ export default function Home(){
 
         <div className='column'>
             <div className='recipe-container'>
-            {currentRecipes?.map(el => {
+             {currentRecipes && currentRecipes.length ? (
                 
-                return ( 
-                    <div key={(el.id)}>
-                            <RecipeCard title={el.title} image={el.image} id= {el.id} healtscore = {el.healthScore} diets = {el.diets} />
-                    </div>
-                 )
-                })
-             }
+                   currentRecipes?.map(el => {
+                    return ( 
+                        <div key={(el.id)}>
+                                <RecipeCard title={el.title} image={el.image} id= {el.id} healtscore = {el.healthScore} diets = {el.diets} />
+                        </div>
+                     )
+                    })
+                ) 
+                : 
+                (
+
+                <div id="loading">
+                    <div class="spinner"></div>
+                </div>
+                  
+
+                )}
              </div>
              
              <Pagination
@@ -97,18 +109,18 @@ export default function Home(){
          </div>
          
         </div>
-            <div className={flag? "overlay active" : "overlay "} >        
-                    <div className={flag?  "popup active" : "popup "} >
-                        <a href="/#"  onClick={e => closeform(e , false)} className="btn-cerrar-popup">Reload Recipes</a>
-                        <div className="container" >
-                            <div>
-                                Receta/s no encontrada/s
-                            </div>
-                                <span className="responsive-button" href="/#"  onClick={''}>Cerrar</span> 
-                        </div> 
-                    </div>
-             </div> 
+        <div className={flag? "overlay active" : "overlay "} >        
+            <div className={flag?  "popup active" : "popup "} >
+                <div class="error-popup__content">
+                    <h3 class="error-popup__title">Error</h3>
+                    <p class="error-popup__text">Lo siento, la receta que estás buscando no se encuentra en nuestro sitio.</p>
+                    <button class="error-popup__button" onClick={e => closeform(e , false)}>Cerrar</button>
+                </div>
+            </div>
+        </div> 
         </section>
+
+
 
     )
 }

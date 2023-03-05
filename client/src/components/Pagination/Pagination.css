@@ -20,6 +20,21 @@
   font-weight: 700;
   color: white;
   background-color: #280902;
-  margin: 10px;
-  font-size: 1rem
+  margin: 5px 10px 5px 10px;
+  font-size: 1.4rem;
+  width: 25px;
+}
+
+.numbers p {
+  font-family: "Amatic SC", sans-serif;
+  font-weight: 700;
+  color: white;
+  background-color: #280902;
+  margin: 5px 10px 5px 10px;
+  font-size: 1.4rem;
+  width: 100%;
+}
+
+.numbers button:hover {
+  background-color: #594a47c3;;
 }
