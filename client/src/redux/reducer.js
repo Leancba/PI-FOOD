@@ -110,10 +110,13 @@ export default function rootReducer (state = initialState, action){
             //en primer lugar el tipo de dieta para poder ver al filtrarlo en el front
 
             recipeFilter.forEach(receta => {
+                
                 const indiceTipoDieta = receta.diets.indexOf(action.payload);
+
                 if (indiceTipoDieta > -1) {
 
                   receta.diets.splice(indiceTipoDieta, 1);
+
                   receta.diets.unshift(action.payload);
 
                 }

@@ -69,13 +69,14 @@ export const getRecipeDetail = (id) => {
             
             dispatch({ 
                 type: RECIPE_DETAIL, 
-                payload: result.data
+                payload: result.data,
+                flag : false
              });
 
         } catch (error) {
             
             dispatch({ 
-                
+
                 type: RECIPE_DETAIL, flag : true });
 
             console.log('entro en error')

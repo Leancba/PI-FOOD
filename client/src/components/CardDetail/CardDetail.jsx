@@ -1,7 +1,7 @@
 import React, { useEffect,useRef } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import './CardDetail.css'
-import { getRecipeDetail, cleanRecipes } from "../../redux/actions";
+import { getRecipeDetail, cleanRecipes,setFlag } from "../../redux/actions";
 import { Link, useParams } from "react-router-dom";
 
 
@@ -19,11 +19,10 @@ export default function CardDetails() {
 
   const recipe = useSelector((state) => state?.recipesDetails);
   const flag = useSelector(state => state.flag )
-  console.log(flag)
 
-  console.log(recipe)
+  // console.log(recipe.steps?.length)
+
   
-{/* <Link to="/home"><button >Go back</button></Link>           */}
 
   useEffect(() => {
 
@@ -32,9 +31,18 @@ export default function CardDetails() {
 
   }, [dispatch]);
 
+  function closeform() {
+
+    dispatch(setFlag(false));
+  
+
+}
+
 
   function mostrarPasos(p) {
+    resume.current.classList.remove('mostrar');
     pasosLista.current.classList.add('mostrar');
+    
   }
 
   function cerrarPasos() {
@@ -42,6 +50,8 @@ export default function CardDetails() {
   }
 
   function mostrarResume() {
+  
+    pasosLista.current.classList.remove('mostrar');
     resume.current.classList.add('mostrar');
   }
 
@@ -77,6 +87,10 @@ export default function CardDetails() {
            <button onClick={mostrarResume} className="boton-1" >Resume Recipe</button>     
            <button onClick={mostrarPasos}  className="boton-2" >Recipe Steps</button>
         </div>
+
+        <Link to="/home"> 
+        <button id="redireccionar" className="boton-2" onClick={closeform}>Ir a Inicio</button>
+      </Link>
   
   
         <div class="resume" ref={resume} >
@@ -92,11 +106,21 @@ export default function CardDetails() {
         <div className="receta-pasos-lista" ref={pasosLista}>
             <div className="receta-popup">
                <h2>Recipe Steps</h2>
-               <ul className="receta-pasos">
+               {recipe.steps && recipe.steps?.[0] === "No hay pasos en esta receta"? (
+                <div>
+                  <strong>
+                    {recipe.steps?.[0]}
+                  </strong>
+                </div> 
+             ) 
+             : 
+             (
+              <ul className="receta-pasos">
                  {recipe.steps?.map((step, index) => (
                    <li key={index}><span>{index + 1}.</span> {step}</li>
                   ))}
                </ul>
+             )}
              <button className="cerrar-popup" onClick={cerrarPasos}>
                  Cerrar
              </button>
@@ -111,14 +135,15 @@ export default function CardDetails() {
      </div> 
       )
     }
-    <div class="popup">
+    <div className={flag? "popup-no-id active" : "popup-no-id"}>
       <div class="popup-content">
       <h2 class="popup-title">Error</h2>
       <p class="popup-text">La receta solicitada no existe en nuestro sitio.</p>
-      <button id="redireccionar" class="popup-button">Ir a Inicio</button>
+      <Link to="/home"> 
+        <button id="redireccionar" className="popup-button" onClick={closeform}>Ir a Inicio</button>
+      </Link>
       </div>
     </div>
-
 </section>
 
   );

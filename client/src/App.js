@@ -14,7 +14,7 @@ function App() {
 				  <Route exact path='/home' component={Home} />
           <Route exact path='/recipe/:id' component={CardDetails} />
           <Route exact path='/create' component={CreateRecipe} />
-
+          <Route path='*' component={Landing}/>
         </Switch>
     </BrowserRouter>
   </div>
