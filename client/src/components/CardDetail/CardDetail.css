@@ -41,7 +41,10 @@
 }
 
 .receta-tipos-dieta {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .receta-tipos-dieta h3 {
@@ -50,14 +53,20 @@
 }
 
 .receta-tipos-dieta ul {
-  list-style-type: none;
-  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
   padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
 .receta-tipos-dieta li {
-  font-size: 18px;
-  margin-bottom: 5px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
 }
 
 .receta-resumen {
@@ -72,6 +81,7 @@
 .receta-resumen p {
   font-size: 18px;
   line-height: 1.5;
+  text-align: left;
 }
 
 .receta-healthscore {
@@ -106,3 +116,73 @@
   font-size: 18px;
   line-height: 1.5;
 }
+
+
+
+.receta-pasos-lista {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 0.5s ease-in-out, opacity 0.5s linear;
+  z-index: 9999;
+}
+
+.receta-pasos-lista.mostrar {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 100%;
+}
+
+
+.receta-popup {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.receta-popup h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.receta-pasos {
+  list-style: none;
+  padding: 0;
+}
+
+.receta-pasos-lista li {
+  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.cerrar-popup {
+  background-color: #ccc;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.cerrar-popup:hover {
+  background-color: #6a6c69
+  
+}
+
+
+
+
+
+

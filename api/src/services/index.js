@@ -17,7 +17,7 @@ const getAllRecipes = async () => {
                 summary: recipe?.summary,
                 healthScore: recipe?.healthScore,
                 diets: recipe?.diets,
-                steps: (recipe.analyzedInstructions[0] && recipe.analyzedInstructions[0].steps ? recipe.analyzedInstructions[0].steps.map(e => e.step) : 'No hay pasos')
+                steps: (recipe.analyzedInstructions[0] && recipe.analyzedInstructions[0].steps ? recipe.analyzedInstructions[0].steps.map(e => e.step) : ["No hay pasos en esta receta"])
                 
             }
         });

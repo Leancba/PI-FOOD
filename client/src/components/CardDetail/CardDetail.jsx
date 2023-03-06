@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useRef } from "react";
 import './CardDetail.css'
 import { useDispatch, useSelector } from "react-redux";
 import { getRecipeDetail, cleanRecipes } from "../../redux/actions";
@@ -9,19 +9,13 @@ import { Link, useParams } from "react-router-dom";
 export default function CardDetails() {
 
   const dispatch = useDispatch();
+
+  const pasosLista = useRef(null);
+  const resume = useRef(null)
+
   
   const { id } = useParams();
   const recipe = useSelector((state) => state?.recipesDetails);
-
-  console.log(recipe.steps)
-
-
-//   const stepsText = "Primera oración. Segunda oración. Tercera oración.";
-// const stepsArray = stepsText.split(".");
-
-
-
-
   
 {/* <Link to="/home"><button >Go back</button></Link>           */}
 
@@ -31,6 +25,15 @@ export default function CardDetails() {
     dispatch(cleanRecipes());
 
   }, [dispatch]);
+
+
+  function mostrarPasos() {
+    pasosLista.current.classList.add('mostrar');
+  }
+
+  function cerrarPopup() {
+    pasosLista.current.classList.remove('mostrar');
+  }
 
   return (
   <section className="container-detail" >
@@ -45,37 +48,33 @@ export default function CardDetails() {
            ))}
           </ul>
       </div>
-      <div class="receta-resumen">
-        <h3>Resumen de la receta:</h3>
-        <p dangerouslySetInnerHTML={{ __html: recipe?.summary?.replace(/<a\b[^>]*>(.*?)<\/a>/gi, '<strong>$1</strong>')}}></p>
-      </div>
       <div class="receta-healthscore">
         <h3>{recipe.healthScore}</h3>
         <p></p>
       </div>
+
+      <div class="receta-resumen" ref={resume} >
+        <button></button>
+        <h3>Resumen de la receta:</h3>
+        <p dangerouslySetInnerHTML={{ __html: recipe?.summary?.replace(/<a\b[^>]*>(.*?)<\/a>/gi, '<strong>$1</strong>')}}></p>
+      </div>
+
       <div class="receta-preparacion">
-        <h3>Paso a paso de la preparación:</h3>
-        {/* <ul>
-            {recipe.steps && recipe.steps.length > 0 ? 
-
-            recipe.steps?.map((steps, index) => (
-
-             <li key={index}>{steps}</li>
-           ))
-           
-           :
-
-           (  
-           <li>{recipe.steps}</li>
-           )
-            
-            }
-
-          </ul> */}
-
-
-
-
+        <button class="receta-pasos" onClick={mostrarPasos}>Ver pasos de la receta</button>
+      
+        <div className="receta-pasos-lista" ref={pasosLista}>
+           <div className="receta-popup">
+              <h2>Pasos de la receta</h2>
+              <ul className="receta-pasos">
+                {recipe.steps?.map((step, index) => (
+                  <li key={index}>{step}</li>
+                 ))}
+              </ul>
+            <button className="cerrar-popup" onClick={cerrarPopup}>
+                Cerrar
+            </button>
+          </div>
+        </div>
 
       </div>
   </div>
