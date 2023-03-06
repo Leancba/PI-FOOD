@@ -4,6 +4,7 @@ import {
     GET_ALL_DIETS, 
     FILTER_BY_DIETS, 
     FLAG , 
+    FLAG_ID,
     SORT_BY_TITLE, 
     SORT_BY_SCORE,
     RECIPE_DETAIL, 
@@ -72,6 +73,11 @@ export const getRecipeDetail = (id) => {
              });
 
         } catch (error) {
+            
+            dispatch({ 
+                
+                type: RECIPE_DETAIL, flag : true });
+
             console.log('entro en error')
             console.log('ERROR EN getRecipeId /actions', error);
 

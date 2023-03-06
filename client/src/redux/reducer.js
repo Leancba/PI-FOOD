@@ -4,6 +4,7 @@ RECIPES_BY_NAME,
 GET_ALL_DIETS,
 FILTER_BY_DIETS,
 FLAG,
+FLAG_ID,
 SORT_BY_TITLE,
 SORT_BY_SCORE,
 RECIPE_DETAIL,
@@ -17,13 +18,9 @@ const initialState = {
 
     //estado para realizar filtro de dieta
     recipesForFilter: [],
-
     recipesDetails: [],
-
     recipesbyname:[],
     diets : [],
-
-
     flag : false
 
 
@@ -76,21 +73,20 @@ export default function rootReducer (state = initialState, action){
 
                 ...state, 
                 recipes : action.payload,
-
                 recipesForFilter:action.payload,
-
                 flag: action.flag
                 
                 
             }
 
         case RECIPE_DETAIL:
-
+            console.log('estoy en detail', action.flag)
             return {
                 ...state,
                 recipesDetails: action.payload,
+                flag: action.flag
             };
-
+        
         case CLEAN_DETAIL_RECIPE:
 
             return {

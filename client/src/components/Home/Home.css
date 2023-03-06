@@ -34,10 +34,11 @@
 /**/
 
 #loading {
+  border-radius: 5px;
   position: fixed;
   top: 10%;
-width: 85%;
-height: 83%;
+  width: 85%;
+  height: 83%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
   display: flex;
