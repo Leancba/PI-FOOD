@@ -3,8 +3,7 @@ import {
     RECIPES_BY_NAME, 
     GET_ALL_DIETS, 
     FILTER_BY_DIETS, 
-    FLAG , 
-    FLAG_ID,
+    FLAG ,
     SORT_BY_TITLE, 
     SORT_BY_SCORE,
     RECIPE_DETAIL, 
@@ -19,10 +18,14 @@ export const postRecipe = (payload) => {
     try {
         return async () => {
             let newRecipe = await axios.post('http://localhost:3002/recipe' , payload);
+            console.log(newRecipe)
             return newRecipe;
+            
         };
     } catch (error) {
+        
         console.log('ERROR EN postRecipe', error)
+        
     }
 };
 

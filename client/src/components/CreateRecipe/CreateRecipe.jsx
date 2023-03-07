@@ -1,18 +1,22 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllDiets, postRecipe } from '../../redux/actions';
+import { getAllDiets, postRecipe, getAllRecipes } from '../../redux/actions';
 import './CreateRecipe.css'
-import "./formInput.css";
 import FormInput from "./FormInput";
+import { Link } from "react-router-dom";
 
-//https://github.com/safak/youtube/blob/react-form/src/App.jsx
+
 
 export default function CreateRecipe() {
 
   const dispatch = useDispatch()
+
   const allDiets = useSelector(state => state.diets);
+  const allRecipes = useSelector(state => state.recipes)
+
 
   useEffect(() => {
+    dispatch(getAllRecipes());
     dispatch(getAllDiets());
   }, [dispatch]);
 
@@ -25,9 +29,14 @@ export default function CreateRecipe() {
     diet: []
   });
 
-  const [popuflag, setPopupflag] = useState(false)
+  const [popuflag, setPopupflag] = useState('')
 
-  const [mensaje, setMensaje] = useState('')
+  const [title, setTitle] = useState('Error');
+  const [mensaje, setMensaje] = useState('probando');
+
+  const containerClass = title === 'Error' ? 'container-popup-error' : 'container-popup-exito';
+  const buttonColor = title === "Error" ? "red" : "green";
+  const buttonText = title === "Error" ? "Aceptar" : "Continuar";
   
   
 
@@ -40,13 +49,13 @@ export default function CreateRecipe() {
         "Title should be 3-16 characters and shouldn't include any special character!",
       label: "Title",
       required : true, 
-      pattern:"[a-zA-Z ]{3,}"
+      pattern:"[a-zA-Z0-9 ]{3,}"
     },
     {
       name: "summary",
       maxLength:"1000",
       type: "text",
-      placeholder: "Summary of your recipe",
+      placeholder: "The summary must contain at least 30 characters",
       errorMessage: "Mensaje de error",
       label: "Summary",
       pattern: "^[a-zA-Z0-9 ]{30,}$",
@@ -56,7 +65,7 @@ export default function CreateRecipe() {
       name: "steps",
       type: "text",
       placeholder: "Steps of your recipe",
-      errorMessage: "Mensaje de error",
+      errorMessage: "The recipe must contain at least 3 steps (sentences), separated by a full stop each. Ex: Steps 1. Steps 2. Steps 3.",
       label: "Steps",
       pattern:"^(.*\\..*){1,}\\.$",
       required: true
@@ -66,7 +75,7 @@ export default function CreateRecipe() {
       type: "number",
       step:"5",
       placeholder: "Health Score of your recipe",
-      errorMessage: "Mensaje de error",
+      errorMessage: "Select a number between 0 and 100",
       label: "Health Score",
       min:"0",
       max:"100",
@@ -77,33 +86,49 @@ export default function CreateRecipe() {
       name: "image",
       type:"url",
       placeholder: "Enter the url",
-      errorMessage: "algo anda mal",
+      errorMessage: "The address does not correspond to an image jpeg , jpg , gif , png.",
       label: "Image",
       pattern: `^(ftp|http|https):\/\/[^ "]+\.(jpeg|jpg|gif|png)$`,
       required: true,
     }
   ];
 
-
-
-
-
-  
-
   const handleSubmit = (e) => {
+
     e.preventDefault();
 
-
     if(values.diet.length === 0 ){
-
-      setMensaje('Debes cargar una dieta')
+      
       setPopupflag(true)
-
-    }
-
-
-    dispatch(postRecipe(values));
+      setTitle('Error')
+      setMensaje('Debes cargar una dieta')
     
+    } else if (allRecipes.find((r) => r.title.toLowerCase() === values.title.toLowerCase())){
+      setPopupflag(true)
+      setTitle('Error')
+      setMensaje('La receta ya existe')
+    }
+     else{
+
+      try {
+        
+        dispatch(postRecipe(values))
+         .then(() => {
+          setPopupflag(true)
+          setTitle('Exito')
+          setMensaje('La receta ha sido creada con exito!')
+
+      })
+        .catch((error) => {
+        setPopupflag(true)
+        setTitle('Error')
+        setMensaje('ha ocurrido un error en la creacion de la receta, vuelva a intentarlo.')
+     });
+        
+      } catch (error) {
+        console.error(error)
+      }
+    }
   };
 
   const onChange = (e) => {
@@ -117,6 +142,18 @@ export default function CreateRecipe() {
     setPopupflag(false)
   }
 
+  const closeFormClean = () => {
+    setPopupflag(false)
+    setValues({
+      title: "",
+      summary: "",
+      steps: "",
+      healthScore: "",
+      image: "",
+      diet: []
+    });
+  
+  }
 
   const handleCheckDiet = (e) => {
     if (e.target.value && !values.diet.includes(e.target.value)) {
@@ -134,9 +171,12 @@ export default function CreateRecipe() {
   };
 
   return (
-    <div className="">
+    <section id="form">
+      <h1>Create Recipe</h1>
       <form onSubmit={handleSubmit}>
-        <h1>Register</h1>
+        
+        <div className="inputs" >
+          <div className="inputs-container" >
         {inputs.map((input) => (
           <FormInput
             key={input.id}
@@ -145,35 +185,60 @@ export default function CreateRecipe() {
             onChange={onChange}
           />
         ))}
-         <label> Select the Diets: </label>
-            {allDiets?.map((d) => {
+        </div>
+        </div>
+        <div className="checkboxes">
+            <label className="checkboxes__label">Select the Diets:</label>
+            <ul className="checkboxes__list">
+              {allDiets?.map((d) => {
               return (
-                <ul key={d.id}>
-                  <input
-                    type="checkbox"
-                    name={d.name}
-                    value={d.name}
-                    onChange={(e) => handleCheckDiet(e)}
-                    className="formInput"
-                  />
-                  {d.name.charAt(0).toUpperCase() + d.name.slice(1)}
-                </ul>
-              );
-            })}
-        <button>Submit</button> 
+              <li key={d.id} className="checkboxes__item">
+              <input
+                type="checkbox"
+                name={d.name}
+                value={d.name}
+                onChange={(e) => handleCheckDiet(e)}
+                id={`diet-${d.id}`}
+                className="checkboxes__input visually-hidden"
+          />
+              <label htmlFor={`diet-${d.id}`} className="checkboxes__text">
+                {d.name.charAt(0).toUpperCase() + d.name.slice(1)}
+              </label>
+              </li>
+            );
+          })}
+          </ul>
+      </div>
+
+      <div class="submit-btn">
+        <button type="submit">Enviar</button>
+      </div>
+
+
       </form>
       <div className={popuflag? "overlay active" : "overlay "} >        
                     <div className={popuflag?  "popup active" : "popup "} >
-                        <a href="/#"  onClick={(e) => closeForm(e)} className="btn-cerrar-popup">X</a>
-                        <div className="container" >
-                            <div>
-                                {mensaje}
-                            </div>
-                                <span className="responsive-button" href="/#"  onClick={(e) => closeForm(e)} >Cerrar</span> 
-                        </div> 
+                      <div className={containerClass}>
+                        <div className="titulo">{title}</div>
+                        <div className="mensaje">{mensaje}</div>
+
+                        {title === 'Exito' ? (
+                          <Link to="/create"> 
+                          <button className="btn" onClick={closeFormClean} >
+                            Cargar otra receta
+                          </button>
+                        </Link>
+                          
+                        ):
+                        <button className="btn" onClick={closeForm} >
+                           Cerrar
+                        </button>
+                        }
+
+                      </div> 
                     </div>
              </div> 
-    </div>
+    </section>
   );
 };
 

@@ -42,8 +42,12 @@ export default function Filters({ setOrder }) {
   function handleDietsFilter(e){
 
     e.target.value === 'All' ?
+    
+    
     dispatch(getAllRecipes())
+    
     : 
+
     dispatch(filterRecipesByDiets(e.target.value))
     dispatch(SortByTitle(payload))
     
@@ -83,7 +87,7 @@ export default function Filters({ setOrder }) {
         setTitleFlag(false)
 
     } else if(e.target.value === 'ALL') {
-
+      
       setTitleFlag(true)
 
     }

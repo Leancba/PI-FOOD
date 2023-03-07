@@ -1,25 +1,31 @@
 .formInput{
+    margin: auto;
+    padding: 5px;
     display: flex;
     flex-direction: column;
-    width: 280px;
+    width: 60%;
 }
 
 input{
-    padding: 15px;
-    margin: 10px 0px;
-    border-radius: 5px;
-    border: 1px solid gray;
+    display: block; 
+  margin-bottom: 10px; 
+  padding: 10px; 
+  border: none; 
+  border-radius: 5px; 
+  background-color: #ffffff87;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.1); 
 }
 
 
 label{
-    font-size: 12px;
-    color: gray;
+    font-family: "Amatic SC", sans-serif;
+    font-size: 1.5rem;
+    color: rgb(255, 255, 255);
 }
 
 .formInput span{
-    font-size: 12px;
-    padding: 3px;
+    font-size: 15px;
+    padding: 0px;
     color: red;
     display: none;
 }
