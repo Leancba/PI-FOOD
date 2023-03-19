@@ -41,7 +41,7 @@ export default function SearchBar(){
 
             <div className="container-search" >
                  <input value={name} type='text' placeholder='Search recipe by name...' onChange={e =>  handleInputOnChange(e)}/>
-                 <button type='sumbit' onClick={e => handleOnSubmit(e)} > BUSCAR </button>
+                 <button type='sumbit' onClick={e => handleOnSubmit(e)} > Search </button>
             </div>
     
         </nav>

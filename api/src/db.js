@@ -36,6 +36,7 @@ const { Recipe, Diet } = sequelize.models;
 Recipe.belongsToMany(Diet, {through: "RecipeDiets", timestamps: false});
 Diet.belongsToMany(Recipe, {through: "RecipeDiets", timestamps: false});
 
+
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 

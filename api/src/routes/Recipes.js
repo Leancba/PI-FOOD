@@ -44,7 +44,9 @@ router.get('/', async (req, res) => {
         
     
    } catch (error) {
-    res.status(404).send("Error en alguno de los datos provistos")    
+
+    res.status(404).send("Error en alguno de los datos provistos")   
+     
    }
 });
 

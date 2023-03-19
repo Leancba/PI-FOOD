@@ -56,7 +56,7 @@ export default function CreateRecipe() {
       maxLength:"1000",
       type: "text",
       placeholder: "The summary must contain at least 30 characters",
-      errorMessage: "Mensaje de error",
+      errorMessage: "The summary must contain at least 30 characters",
       label: "Summary",
       pattern: "^[a-zA-Z0-9 ]{30,}$",
       required: true,
@@ -176,16 +176,25 @@ export default function CreateRecipe() {
       <form onSubmit={handleSubmit}>
         
         <div className="inputs" >
+
+
+
           <div className="inputs-container" >
         {inputs.map((input) => (
           <FormInput
             key={input.id}
             {...input}
             value={values[input.name]}
+            
             onChange={onChange}
           />
         ))}
         </div>
+
+
+
+
+
         </div>
         <div className="checkboxes">
             <label className="checkboxes__label">Select the Diets:</label>
@@ -211,7 +220,7 @@ export default function CreateRecipe() {
       </div>
 
       <div class="submit-btn">
-        <button type="submit">Enviar</button>
+        <button type="submit">Send</button>
       </div>
 
 
@@ -223,15 +232,15 @@ export default function CreateRecipe() {
                         <div className="mensaje">{mensaje}</div>
 
                         {title === 'Exito' ? (
-                          <Link to="/create"> 
+                          <Link to="/home"> 
                           <button className="btn" onClick={closeFormClean} >
-                            Cargar otra receta
+                            Back to home
                           </button>
                         </Link>
                           
                         ):
                         <button className="btn" onClick={closeForm} >
-                           Cerrar
+                           Close
                         </button>
                         }
 

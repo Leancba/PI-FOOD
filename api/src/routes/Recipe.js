@@ -37,6 +37,7 @@ router.get('/:id', async (req, res) => {
     } catch (error) {
         
         return res.status(404).send(`La receta solicitada mediante el id <strong>${id}</strong> no existe`)
+
     }
 
 });
@@ -57,9 +58,11 @@ router.post('/', async (req, res, next) => {
         const DietDb = await Diet.findAll({ 
 
             where: {
+
                 name: diet
+
             }});
-        console.log('viendo que es', DietDb)
+        
            
         await newRecipe.addDiet(DietDb);
 

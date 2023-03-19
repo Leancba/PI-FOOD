@@ -1,11 +1,14 @@
 const axios = require('axios')
+const { API_KEY } = process.env;
 const { Recipe, Diet  } = require('../db');
-
 const getAllRecipes = async () => {
 
-    try {
-        let info = await axios.get('https://run.mocky.io/v3/0037ee6c-36b1-4c4f-901e-242e02e3c120')
 
+    try {
+        
+        
+        let info = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?&addRecipeInformation=true&apiKey=${API_KEY}&number=100`)
+        console.log('probando', info)
         
 
         const AllRecipesApi = info.data.results.map(function (recipe, index)  {
@@ -53,8 +56,11 @@ const getDBInfo = async () => {
         var DbRecipes = JSON.parse(JSON.stringify(dbInfo, null, 2));
         
         DbRecipes.forEach((e) => (e.diets = e.diets.map((d) => d.name)));
+
         DbRecipes.forEach((recipe) => {
-            recipe.steps = recipe.steps.split('. ');
+
+            recipe.steps = recipe.steps.split('.');
+            
           });
 
         return DbRecipes;

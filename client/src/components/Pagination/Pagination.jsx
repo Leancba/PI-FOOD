@@ -23,7 +23,7 @@ export default function Pagination ({pageNow, allVideogamesfromState, vgPerPage}
                 ) 
                 : 
                 (
-                <div className='numbers'> <p>Cargando recetas..</p></div>
+                <div className='numbers'> <p>Loading Recipes...</p></div>
                 )}
             </div>
          </div>
