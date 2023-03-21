@@ -1,7 +1,7 @@
 import React from "react";
 import './SearchBar.css'
 import logo from './cooking.png'
-
+import LoginModal from "./login";
 import { useState } from "react";
 import { useDispatch } from 'react-redux'
 import { getRecipeByName} from "../../redux/actions";
@@ -14,6 +14,7 @@ export default function SearchBar(){
     const dispatch = useDispatch()
 
     const [name, setName] = useState('')
+    const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
     
     function handleInputOnChange(e) {
@@ -42,7 +43,9 @@ export default function SearchBar(){
             <div className="container-search" >
                  <input value={name} type='text' placeholder='Search recipe by name...' onChange={e =>  handleInputOnChange(e)}/>
                  <button type='sumbit' onClick={e => handleOnSubmit(e)} > Search </button>
+                 <button type='button' onClick={() => setIsLoginModalOpen(true)} > Login </button>
             </div>
+            <LoginModal isOpen={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)} />
     
         </nav>
     

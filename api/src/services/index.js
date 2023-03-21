@@ -7,7 +7,7 @@ const getAllRecipes = async () => {
     try {
         
         
-        let info = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?&addRecipeInformation=true&apiKey=${API_KEY}&number=100`)
+        let info = await axios.get('https://run.mocky.io/v3/0037ee6c-36b1-4c4f-901e-242e02e3c120')
         console.log('probando', info)
         
 

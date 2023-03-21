@@ -10,6 +10,8 @@ const router = Router();
 const recipe = require('./Recipe');
 const recipes = require('./Recipes');
 const diets = require('./Diets')
+const login = require('./Login')
+
 
 
 // Ejemplo: router.use('/auth', authRouter);
@@ -17,6 +19,7 @@ const diets = require('./Diets')
 router.use('/recipe', recipe);
 router.use('/recipes', recipes);
 router.use('/diets', diets)
+router.use('/login', login)
 
 
 

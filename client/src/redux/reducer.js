@@ -9,7 +9,8 @@ SORT_BY_SCORE,
 RECIPE_DETAIL,
 CLEAN_DETAIL_RECIPE,
 FLAG_POST,
-POST_RECIPE
+POST_RECIPE,
+LOGIN_SUCCESS
 } from "./actionTypes";
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
     recipesDetails: [],
     recipesbyname:[],
     diets : [],
+    token: [],
     flag : false
 
 
@@ -33,6 +35,18 @@ export default function rootReducer (state = initialState, action){
     
     
     switch (action.type) {
+
+        case LOGIN_SUCCESS:
+            
+            return {
+                
+                ...state,
+                token: action.payload,
+               
+            }
+
+
+
 
 
         case POST_RECIPE:
