@@ -9,7 +9,8 @@ import {
     RECIPE_DETAIL,
     CLEAN_DETAIL_RECIPE,
     POST_RECIPE,
-    LOGIN_SUCCESS
+    LOGIN_SUCCESS,
+    LOGOUT
 } from "./actionTypes";
 
 import axios from 'axios'
@@ -20,7 +21,6 @@ export const Login = (payload) => {
         try {
             const response = await axios.post('http://localhost:3003/login', payload);
             const token = response.data.token;
-            localStorage.setItem('token', token);
             dispatch({ type: LOGIN_SUCCESS , payload: token });
         } catch (error) {
             console.log('Error en postLogin:', error);
@@ -28,6 +28,15 @@ export const Login = (payload) => {
         }
     };
 };
+
+
+export function Logout(payload) {
+
+    return {
+        type: LOGOUT,
+        payload
+    }
+}
 
 export const postRecipe = (payload) => {
 

@@ -10,7 +10,8 @@ RECIPE_DETAIL,
 CLEAN_DETAIL_RECIPE,
 FLAG_POST,
 POST_RECIPE,
-LOGIN_SUCCESS
+LOGIN_SUCCESS,
+LOGOUT
 } from "./actionTypes";
 
 const initialState = {
@@ -22,7 +23,7 @@ const initialState = {
     recipesDetails: [],
     recipesbyname:[],
     diets : [],
-    token: [],
+    token: localStorage.getItem("token"),
     flag : false
 
 
@@ -37,12 +38,20 @@ export default function rootReducer (state = initialState, action){
     switch (action.type) {
 
         case LOGIN_SUCCESS:
-            
+            const token = action.payload;
+            localStorage.setItem("token", token)
             return {
                 
                 ...state,
                 token: action.payload,
                
+            }
+
+            case LOGOUT:
+            localStorage.removeItem("token");
+            return {
+                
+                ...state,
             }
 
 

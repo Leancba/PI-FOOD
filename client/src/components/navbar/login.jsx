@@ -5,16 +5,31 @@ import './login.css'
 
 const LoginModal = ({ isOpen, onClose }) => {
     
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [values, setValues] = useState({
+    username: '',
+    password: ''
+  });
+
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.token)
+  console.log(token)
+
+  const handleOnChange = (event) => {
+
+    const { name, value } = event.target;
+    setValues({ ...values, [name]: value });
+
+  };
+  
 
   if (!isOpen) {
     return null;
   }
 
   const handleOnSubmit = (e) => {
-    e.preventDefault();
-    console.log(`Username: ${username}, Password: ${password}`);
+    e.preventDefault()
+    console.log(values)
+    dispatch(Login(values))
     onClose();
   };
 
@@ -25,14 +40,15 @@ const LoginModal = ({ isOpen, onClose }) => {
         <form onSubmit={handleOnSubmit}>
           <label>
             Username:
-            <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <input type="text" name="username" value={values.username} onChange={handleOnChange} />
           </label>
           <label>
             Password:
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" name="password" value={values.password} onChange={handleOnChange} />
           </label>
           <button type="submit">Submit</button>
         </form>
+        <button type="submit">Cerrar</button>
       </div>
     </div>
   );
