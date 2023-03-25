@@ -8,7 +8,6 @@ SORT_BY_TITLE,
 SORT_BY_SCORE,
 RECIPE_DETAIL,
 CLEAN_DETAIL_RECIPE,
-FLAG_POST,
 POST_RECIPE,
 LOGIN_SUCCESS,
 LOGOUT
@@ -76,7 +75,7 @@ export default function rootReducer (state = initialState, action){
 
 
         case RECIPES:
-            
+            console.log(state)
             return {
 
 
@@ -244,8 +243,7 @@ export default function rootReducer (state = initialState, action){
              }
          }
 
-             default: {
-                return state
-            };
+             default: return state
+            
         }
     }

@@ -28,6 +28,7 @@ export default function Filters({ setOrder }) {
 
 
   const allDiets = useSelector(state => state.diets);
+  console.log(allDiets)
 
   const allRecipes = useSelector(state => state.recipes);
 

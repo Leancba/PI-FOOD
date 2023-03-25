@@ -19,7 +19,7 @@ import axios from 'axios'
 export const Login = (payload) => {
     return async (dispatch) => {
         try {
-            const response = await axios.post('http://localhost:3003/login', payload);
+            const response = await axios.post('http://localhost:3001/login', payload);
             const token = response.data.token;
             dispatch({ type: LOGIN_SUCCESS , payload: token });
         } catch (error) {
@@ -42,7 +42,7 @@ export const postRecipe = (payload) => {
 
     try {
         return async () => {
-            let newRecipe = await axios.post('http://localhost:3003/recipe', payload);
+            let newRecipe = await axios.post('http://localhost:3001/recipe', payload);
             console.log(newRecipe)
             return newRecipe;
 
@@ -58,7 +58,7 @@ export function getAllRecipes() {
 
     return async function (dispatch) {
 
-        var result = await axios.get('http://localhost:3003/recipes');
+        var result = await axios.get('http://localhost:3001/recipes');
 
         return dispatch({
             type: RECIPES,
@@ -73,7 +73,7 @@ export const getRecipeByName = (title) => {
     return async (dispatch) => {
         try {
 
-            let result = await axios.get(`http://localhost:3003/recipes?title=${title}`);
+            let result = await axios.get(`http://localhost:3001/recipes?title=${title}`);
 
             dispatch({
                 type: RECIPES_BY_NAME, payload: result.data, flag: false
@@ -95,7 +95,7 @@ export const getRecipeDetail = (id) => {
     return async (dispatch) => {
 
         try {
-            let result = await axios.get(`http://localhost:3003/recipe/${id}`);
+            let result = await axios.get(`http://localhost:3001/recipe/${id}`);
 
             dispatch({
                 type: RECIPE_DETAIL,
@@ -140,7 +140,7 @@ export function setFlag(payload) {
 export function getAllDiets() {
 
     return async function (dispatch) {
-        var result = await axios.get('http://localhost:3003/diets')
+        var result = await axios.get('http://localhost:3001/diets')
 
         return dispatch({
             type: GET_ALL_DIETS,

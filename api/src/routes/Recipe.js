@@ -3,7 +3,7 @@ const { KEY } = process.env;
 const { Router } = require('express');
 const router = Router()
 const axios = require('axios').default;
-const { getAllRecipes } = require('../services/index.js')
+const { getAllRecipes, getDBInfo } = require('../services/index.js')
 const { Recipe, Diet  } = require('../db');
 
 
@@ -13,9 +13,12 @@ router.get('/:id', async (req, res) => {
 
     try {
          
-            const RecipesApi = await getAllRecipes()
+        let recipes = await getAllRecipes();
+        let recipes2 = await getDBInfo()
+    
+        const AllRecipes = [...recipes, ...recipes2]
         
-            let recipeByID = RecipesApi.find(r => r.id == id);
+            let recipeByID = AllRecipes.find(r => r.id == id);
         
         
             let apiGamesById = {

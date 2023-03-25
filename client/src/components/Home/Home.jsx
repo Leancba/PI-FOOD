@@ -62,6 +62,7 @@ export default function Home(){
     const indexOfFirstVg = indexOfLastVg - vgPerPage // 15 - 15 = 0
 
     const currentRecipes = allRecipes.slice(indexOfFirstVg, indexOfLastVg)
+    console.log('recetas', currentRecipes)
 
     const pageNow = (pageNumber) => {
 
