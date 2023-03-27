@@ -1,0 +1,84 @@
+/* Estilos para el botón de cerrar sesión */
+#logoutBtn {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 20px;
+  cursor: pointer;
+}
+
+/* Estilos para el modal */
+.custom-modal {
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilos para el contenido del modal */
+.custom-modal-content {
+  background-color: #fefefe;
+  margin: 10% auto; /* centra el modal en la pantalla */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
+}
+
+/* Estilos para el encabezado del modal */
+.custom-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Estilos para el botón de cerrar del encabezado */
+.custom-close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.custom-close:hover,
+.custom-close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Estilos para el cuerpo del modal */
+.custom-modal-body {
+  margin: 20px 0;
+}
+
+
+/* Estilos para los botones del pie del modal */
+#yesBtn,
+#noBtn {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+#yesBtn:hover,
+#noBtn:hover {
+  background-color: #3e8e41;
+}

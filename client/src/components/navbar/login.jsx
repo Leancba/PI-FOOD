@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { Login } from '../../redux/actions';
+
 import './login.css'
 
 const LoginModal = ({ isOpen, onClose }) => {
@@ -10,9 +11,10 @@ const LoginModal = ({ isOpen, onClose }) => {
     password: ''
   });
 
+  const [loginStatus, setLoginStatus] = useState(null);
+
   const dispatch = useDispatch();
-  const token = useSelector(state => state.token)
-  console.log(token)
+  
 
   const handleOnChange = (event) => {
 
@@ -26,11 +28,23 @@ const LoginModal = ({ isOpen, onClose }) => {
     return null;
   }
 
-  const handleOnSubmit = (e) => {
-    e.preventDefault()
-    console.log(values)
-    dispatch(Login(values))
-    onClose();
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    console.log(values);
+    try {
+      await dispatch(Login(values));
+      setLoginStatus('Login successful');
+      setTimeout(() => {
+        setLoginStatus('');
+        onClose();
+      }, 2000); // establece el estado en una cadena vacía después de 2 segundos
+    } catch (error) {
+      setLoginStatus('Invalid username or password');
+      setTimeout(() => {
+        setLoginStatus('');
+      }, 2000); // establece el estado en una cadena vacía después de 2 segundos
+    }
+    
   };
 
   return (
@@ -46,9 +60,15 @@ const LoginModal = ({ isOpen, onClose }) => {
             Password:
             <input type="password" name="password" value={values.password} onChange={handleOnChange} />
           </label>
+          {loginStatus && (
+          <p style={{ color: loginStatus.includes('Invalid') ? 'red' : 'green' }}>
+            {loginStatus}
+          </p>
+        )}
           <button type="submit">Submit</button>
+          <button type="submit" onClick={() => onClose()}>Close</button>
         </form>
-        <button type="submit">Cerrar</button>
+       
       </div>
     </div>
   );

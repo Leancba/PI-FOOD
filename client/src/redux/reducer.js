@@ -51,6 +51,7 @@ export default function rootReducer (state = initialState, action){
             return {
                 
                 ...state,
+                token:localStorage.getItem("token")
             }
 
 

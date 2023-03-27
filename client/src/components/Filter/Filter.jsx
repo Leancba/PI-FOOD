@@ -28,7 +28,8 @@ export default function Filters({ setOrder }) {
 
 
   const allDiets = useSelector(state => state.diets);
-  console.log(allDiets)
+  const token = useSelector(state => state.token)
+  console.log(token)
 
   const allRecipes = useSelector(state => state.recipes);
 
@@ -162,9 +163,11 @@ export default function Filters({ setOrder }) {
          Reload
       </button>
 
+       {token ? (
       <Link to="/create">
-            <button >Create recipe</button>
+        <button>Create recipe</button>
       </Link>
+    ) : null}
   </div>
           
       

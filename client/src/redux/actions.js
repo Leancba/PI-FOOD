@@ -24,17 +24,16 @@ export const Login = (payload) => {
             dispatch({ type: LOGIN_SUCCESS , payload: token });
         } catch (error) {
             console.log('Error en postLogin:', error);
-            dispatch({ type: 'LOGIN_ERROR', payload: error });
-        }
+            throw new Error('Login error'); // lanzamos un nuevo error usando throw
+          }
     };
 };
 
 
-export function Logout(payload) {
+export function Logout() {
 
     return {
-        type: LOGOUT,
-        payload
+        type: LOGOUT
     }
 }
 
